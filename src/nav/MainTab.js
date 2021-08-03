@@ -59,6 +59,7 @@ const MyTab = ({state, activeTintColor, inactiveTintColor, navigation}) => {
         return (
           <TouchableOpacity
             style={styles.btnTab}
+            key={index}
             onPress={() => navigation.navigate(item)}>
             {renderContent(item, color)}
           </TouchableOpacity>
