@@ -40,6 +40,9 @@ const Assets = {
   img_profile_1: require('../assets/img_profile_1.png'),
   img_profile_2: require('../assets/img_profile_2.png'),
   img_profile_3: require('../assets/img_profile_3.png'),
+  ic_minus: require('../assets/ic_minus.png'),
+  ic_plus: require('../assets/ic_plus.png'),
+  img_menu1: require('../assets/img_menu1.png'),
 };
 
 export default Assets;

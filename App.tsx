@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import {View, Text, Image} from 'react-native';
-
-import Home from './src/screens/Home';
 import Filter from './src/screens/Filter';
 import Onboarding01 from './src/screens/Onboarding01';
 import Onboarding02 from './src/screens/Onboarding02';
@@ -25,7 +22,30 @@ import PasswordSuccess from './src/screens/PasswordSuccess';
 
 import MainTab from './src/nav/MainTab';
 
-const Stack = createStackNavigator();
+export type TRootStackParamList = {
+  MainTab: undefined;
+  Filter: {
+    name: string;
+    age: number;
+  };
+  Onboarding01: undefined;
+  Onboarding02: undefined;
+  Onboarding03: undefined;
+  Login: undefined;
+  Register: undefined;
+  SignupProcess: undefined;
+  PaymentMethod: undefined;
+  UploadPhoto: undefined;
+  UploadPreview: undefined;
+  SetLocation: undefined;
+  SignupSuccess: undefined;
+  ViaMethod: undefined;
+  VerificationCode: undefined;
+  Password: undefined;
+  PasswordSuccess: undefined;
+};
+
+const Stack = createStackNavigator<TRootStackParamList>();
 
 const App = () => {
   return (

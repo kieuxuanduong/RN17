@@ -3,7 +3,6 @@ import {
   View,
   ImageBackground,
   StyleSheet,
-  Pressable,
   SafeAreaView,
   Image,
   Text,
@@ -11,13 +10,14 @@ import {
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
-import Assets from '../../config/Assets';
 import GradientText from '../../components/gradient-text';
+import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEFEFF',
+    backgroundColor: '#fff',
   },
   bg_pattern: {
     flex: 1,
@@ -72,7 +72,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignupSuccess = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const PasswordSuccess = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
@@ -87,7 +91,7 @@ const SignupSuccess = ({navigation}) => {
               style={styles.logo}
             />
             <GradientText style={styles.brand}>Congrats!</GradientText>
-            <Text style={styles.motto}>Your Profile Is Ready To Use</Text>
+            <Text style={styles.motto}>Password reset successful</Text>
           </View>
           <LinearGradient
             start={{x: 0, y: 0}}
@@ -97,9 +101,9 @@ const SignupSuccess = ({navigation}) => {
             <TouchableOpacity
               style={styles.btnLogin}
               onPress={() => {
-                navigation.navigate('MainTab');
+                navigation.navigate('Login');
               }}>
-              <Text style={styles.buttonText}>Try Order </Text>
+              <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
           </LinearGradient>
         </ImageBackground>
@@ -108,4 +112,4 @@ const SignupSuccess = ({navigation}) => {
   );
 };
 
-export default SignupSuccess;
+export default PasswordSuccess;

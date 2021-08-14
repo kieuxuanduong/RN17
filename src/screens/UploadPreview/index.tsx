@@ -3,20 +3,15 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
-  Dimensions,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
-
-const screenWidth = Dimensions.get('window').width;
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,10 +20,12 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
+    // justifyContent: 'space-between',
     alignItems: 'center',
   },
   bg_pattern: {
     flex: 1,
+    // backgroundColor: 'red'
   },
   btnBack: {
     height: 45,
@@ -50,6 +47,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     alignSelf: 'flex-start',
     marginLeft: 25,
+    // backgroundColor: 'red',
   },
   txtSubTitle: {
     fontSize: 12,
@@ -59,36 +57,33 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 20,
   },
-  containerInput: {
-    justifyContent: 'space-between',
-    marginTop: 40,
-    elevation: 1,
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 22,
-    // borderColor: 'rgba(90, 108, 234, 0.07)',
-    // borderWidth: 0.33,
-  },
-  titleBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inputBox: {
-    backgroundColor: '#F6F6F6',
-    borderRadius: 15,
+  containerPreview: {
+    justifyContent: 'flex-start',
+    marginTop: 60,
     borderColor: 'rgba(90, 108, 234, 0.07)',
-    width: screenWidth - 50,
+    height: 245,
+    width: 238,
+    alignItems: 'flex-end',
+    marginBottom: 12,
+  },
+  imgPreview: {
+    borderRadius: 10,
+    height: 245,
+    width: 238,
+  },
+  icClose: {
+    width: 31,
+    height: 31,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 23,
-    marginTop: 27,
+    marginRight: 10,
+    marginTop: 10,
+    borderColor: 'rgba(0, 0, 0, 0.25)',
+    borderWidth: 1,
   },
-  txtDetails: {
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 25,
-    marginHorizontal: 14,
-  },
+
   linearButton: {
     borderRadius: 15,
     height: 57,
@@ -113,7 +108,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const SetLocation = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const UploadPreview = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -131,19 +130,21 @@ const SetLocation = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Set Your Location</Text>
+            <Text style={styles.txtTitle}>Upload Your Photo{'\n'}Profile</Text>
             <Text style={styles.txtSubTitle}>
               This data will be displayed in your account{'\n'}profile for
               security
             </Text>
-            <View style={styles.containerInput}>
-              <View style={styles.titleBar}>
-                <Image source={Assets.ic_pin} />
-                <Text style={styles.txtDetails}>Your Location</Text>
-              </View>
-              <TouchableOpacity style={styles.inputBox}>
-                <Text style={styles.txtDetails}>Set Location</Text>
-              </TouchableOpacity>
+            <View>
+              <ImageBackground
+                resizeMode="contain"
+                source={Assets.img_preview}
+                style={styles.containerPreview}
+                imageStyle={styles.imgPreview}>
+                <TouchableOpacity style={styles.icClose}>
+                  <Image source={Assets.ic_close} />
+                </TouchableOpacity>
+              </ImageBackground>
             </View>
           </View>
         </ScrollView>
@@ -155,7 +156,7 @@ const SetLocation = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('SignupSuccess');
+              navigation.navigate('SetLocation');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -167,4 +168,4 @@ const SetLocation = ({navigation}) => {
   );
 };
 
-export default SetLocation;
+export default UploadPreview;

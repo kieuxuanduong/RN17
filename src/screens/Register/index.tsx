@@ -7,7 +7,6 @@ import {
   ImageBackground,
   StyleSheet,
   Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -17,6 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import GradientText from '../../components/gradient-text';
 import Logo from '../../components/logo';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -103,7 +103,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Register = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const Register = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -159,10 +163,7 @@ const Register = ({navigation}) => {
                   onPress={() => {
                     // navigation.navigate('Onboarding03');
                   }}>
-                  <Image
-                    style={{marginRight: 20}}
-                    source={Assets.ic_show}
-                  />
+                  <Image style={{marginRight: 20}} source={Assets.ic_show} />
                 </Pressable>
               </View>
               <View style={{marginTop: 8, marginBottom: 20}}>

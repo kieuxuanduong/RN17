@@ -3,11 +3,8 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,13 +12,14 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FEFEFF',
   },
   containerContent: {
     flex: 1,
@@ -68,27 +66,21 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     backgroundColor: '#fff',
-    elevation: 3,
+    elevation: 1,
     borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
-    width: screenWidth - 28,
-    height: 103,
-    justifyContent: 'space-around',
+    width: screenWidth - 50,
+    // height: 57,
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 23,
     marginBottom: 12,
-    flexDirection: 'row',
   },
-  txtInput: {
-    color: 'rgba(9, 5, 28, 1)',
-    fontSize: 33,
-    lineHeight: 49,
-    textAlign: 'center',
+  txtDetails: {
+    fontSize: 14,
     fontWeight: '700',
-    letterSpacing: 60,
-    width: screenWidth - 28,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
+    lineHeight: 25,
+    marginTop: 9,
   },
   linearButton: {
     borderRadius: 15,
@@ -114,7 +106,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const VerificationCode = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const UploadPhoto = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -132,21 +128,21 @@ const VerificationCode = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>
-              Enter 4-digit{'\n'}Verification code
-            </Text>
+            <Text style={styles.txtTitle}>Upload Your Photo{'\n'}Profile</Text>
             <Text style={styles.txtSubTitle}>
-              Code send to +6282045**** . This code will{'\n'}expired in 01:30
+              This data will be displayed in your account{'\n'}profile for
+              security
             </Text>
             <View style={styles.containerInput}>
-              <View style={styles.inputBox}>
-                <TextInput
-                  style={styles.txtInput}
-                  maxLength={4}
-                  placeholder={'____'}
-                  keyboardType={'number-pad'}
-                />
-              </View>
+              <TouchableOpacity style={styles.inputBox}>
+                <Image source={Assets.ic_gallery} />
+                <Text style={styles.txtDetails}>From Gallery</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.inputBox}>
+                <Image source={Assets.ic_camera} />
+                <Text style={styles.txtDetails}>Take Photo </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -158,7 +154,7 @@ const VerificationCode = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('Password');
+              navigation.navigate('UploadPreview');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -170,4 +166,4 @@ const VerificationCode = ({navigation}) => {
   );
 };
 
-export default VerificationCode;
+export default UploadPhoto;

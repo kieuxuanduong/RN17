@@ -7,11 +7,10 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TextInput,
   SafeAreaView,
-  Pressable,
   Dimensions,
 } from 'react-native';
+import {MainTabNavigationProp} from '../Home';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -97,7 +96,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Chat = ({route, navigation}) => {
+type Props = {
+  navigation: MainTabNavigationProp;
+};
+
+const Chat = ({navigation}: Props) => {
   const dataChat = [
     {
       id: '0',

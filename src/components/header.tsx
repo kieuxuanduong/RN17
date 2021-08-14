@@ -1,7 +1,7 @@
 import React from 'react';
-import Swiper from 'react-native-swiper';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import Assets from '../config/Assets';
+import {MainTabNavigationProp} from '../screens/Home';
 
 const styles = StyleSheet.create({
   header: {
@@ -29,14 +29,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = ({navigation}) => {
+type Props = {
+  navigation: MainTabNavigationProp;
+};
+
+const Header = ({navigation}: Props) => {
   return (
     <View style={styles.header}>
       <Text style={styles.txtHeader}>Find Your{'\n'}Favorite Food</Text>
       <TouchableOpacity
         style={styles.btnNoti}
         onPress={() => {
-          alert('onPress ic noti');
+          // alert('onPress ic noti');
           if (navigation) {
             navigation.goBack();
           }

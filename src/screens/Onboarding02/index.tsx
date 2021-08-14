@@ -3,9 +3,7 @@ import {
   View,
   Text,
   Image,
-  ImageBackground,
   StyleSheet,
-  Pressable,
   SafeAreaView,
   Dimensions,
   TouchableOpacity,
@@ -13,6 +11,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
   imgOnboard: {
     width: screenWidth,
     // backgroundColor: 'green',
-    marginTop: 87,
+    marginTop: 56.83,
   },
   containerTxt: {
     flex: 1,
@@ -50,9 +49,11 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   linearButton: {
+    paddingLeft: 15,
+    paddingRight: 15,
     borderRadius: 15,
     height: 57,
-    // width: 157,
+    width: 157,
     marginBottom: 31,
   },
   btnNext: {
@@ -60,32 +61,34 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 60,
-    paddingVertical: 18,
   },
   buttonText: {
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
-    // margin: 10,
+    margin: 10,
     color: '#ffffff',
     backgroundColor: 'transparent',
   },
 });
 
-const Onboarding03 = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const Onboarding02 = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={styles.containerContent}>
-          {/* <Image style={styles.imgOnboard} source={Assets.img_onboard03} /> */}
-          <Image style={styles.imgOnboard} source={Assets.img_onboard03} />
+          <Image style={styles.imgOnboard} source={Assets.img_onboard02} />
           <View style={styles.containerTxt}>
             <Text style={styles.txtTitle}>
-              Food Ninja is Where Your{'\n'}Comfort Food Lives
+              Find your Comfort{'\n'}Food Here
             </Text>
             <Text style={styles.txtSubTitle}>
-              Enjoy a fast and smooth food delivery at{'\n'}your doorstep
+              Here You Can find a chef or dish for every{'\n'}taste and color.
+              Enjoy!
             </Text>
           </View>
           <LinearGradient
@@ -96,7 +99,7 @@ const Onboarding03 = ({navigation}) => {
             <TouchableOpacity
               style={styles.btnNext}
               onPress={() => {
-                navigation.navigate('Login');
+                navigation.navigate('Onboarding03');
               }}>
               <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
@@ -107,4 +110,4 @@ const Onboarding03 = ({navigation}) => {
   );
 };
 
-export default Onboarding03;
+export default Onboarding02;

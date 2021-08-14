@@ -3,11 +3,8 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,6 +12,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -25,12 +23,10 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    // justifyContent: 'space-between',
     alignItems: 'center',
   },
   bg_pattern: {
     flex: 1,
-    // backgroundColor: 'red'
   },
   btnBack: {
     height: 45,
@@ -52,7 +48,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     alignSelf: 'flex-start',
     marginLeft: 25,
-    // backgroundColor: 'red',
   },
   txtSubTitle: {
     fontSize: 12,
@@ -65,20 +60,32 @@ const styles = StyleSheet.create({
   containerInput: {
     justifyContent: 'space-between',
     marginTop: 40,
+    elevation: 1,
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 22,
+    // borderColor: 'rgba(90, 108, 234, 0.07)',
+    // borderWidth: 0.33,
+  },
+  titleBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   inputBox: {
-    backgroundColor: '#fff',
-    elevation: 1,
+    backgroundColor: '#F6F6F6',
     borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
     width: screenWidth - 50,
-    height: 57,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingLeft: 28,
-    paddingRight: 18,
-    marginBottom: 12,
-    flexDirection: 'row',
+    padding: 23,
+    marginTop: 27,
+  },
+  txtDetails: {
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 25,
+    marginHorizontal: 14,
   },
   linearButton: {
     borderRadius: 15,
@@ -104,7 +111,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Password = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const SetLocation = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -122,28 +133,19 @@ const Password = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Reset your password{'\n'}here</Text>
+            <Text style={styles.txtTitle}>Set Your Location</Text>
             <Text style={styles.txtSubTitle}>
-              Select which contact details should we{'\n'}use to reset your
-              password
+              This data will be displayed in your account{'\n'}profile for
+              security
             </Text>
             <View style={styles.containerInput}>
-              <View style={styles.inputBox}>
-                <TextInput
-                  style={styles.txtSearch}
-                  placeholder="First Name"
-                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
-                />
-                <Image source={Assets.ic_show_on} />
+              <View style={styles.titleBar}>
+                <Image source={Assets.ic_pin} />
+                <Text style={styles.txtDetails}>Your Location</Text>
               </View>
-              <View style={styles.inputBox}>
-                <TextInput
-                  style={styles.txtSearch}
-                  placeholder="Last Name"
-                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
-                />
-                <Image source={Assets.ic_show_off} />
-              </View>
+              <TouchableOpacity style={styles.inputBox}>
+                <Text style={styles.txtDetails}>Set Location</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -155,7 +157,7 @@ const Password = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('PasswordSuccess');
+              navigation.navigate('SignupSuccess');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -167,4 +169,4 @@ const Password = ({navigation}) => {
   );
 };
 
-export default Password;
+export default SetLocation;

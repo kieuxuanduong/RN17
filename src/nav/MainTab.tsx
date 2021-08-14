@@ -6,7 +6,11 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarOptions,
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 
 import {getBottomSpace} from 'react-native-iphone-x-helper';
 import * as IconlyPack from 'react-native-iconly';
@@ -18,13 +22,27 @@ import Chat from '../screens/Chat';
 import Colors from '../config/Color';
 
 const widthScreen = Dimensions.get('window').width;
-const Tab = createBottomTabNavigator();
 
-const MyTab = ({state, activeTintColor, inactiveTintColor, navigation}) => {
+export type TMainTabParamList = {
+  Home: undefined;
+  Profile: undefined;
+  Cart: undefined;
+  Chat: undefined;
+};
+const Tab = createBottomTabNavigator<TMainTabParamList>();
+
+type TRouteName = keyof TMainTabParamList;
+
+const MyTab = ({
+  state,
+  activeTintColor = Colors.primary,
+  inactiveTintColor = Colors.primary5,
+  navigation,
+}: BottomTabBarProps<BottomTabBarOptions>) => {
   // console.log(props);
-  let routeNames = state.routeNames;
+  let routeNames = state.routeNames as TRouteName[];
   let currentIndex = state.index;
-  const renderContent = (item, color) => {
+  const renderContent = (item: TRouteName, color: string) => {
     switch (item) {
       case 'Home':
         return <IconlyPack.Home set="bold" color={color} key={item} />;

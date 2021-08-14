@@ -6,8 +6,6 @@ import {
   TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -17,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import GradientText from '../../components/gradient-text';
 import Assets from '../../config/Assets';
 import Logo from '../../components/logo';
+import {MainTabNavigationProp} from '../Home';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -120,7 +119,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Login = ({navigation}) => {
+type Props = {
+  navigation: MainTabNavigationProp;
+};
+
+const Login = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -137,14 +140,14 @@ const Login = ({navigation}) => {
             <View style={styles.containerInput}>
               <View style={styles.inputBox}>
                 <TextInput
-                  style={styles.txtSearch}
+                  // style={styles.txtSearch}
                   placeholder="Email"
                   placeholderTextColor="rgba(59, 59, 59, 0.3)"
                 />
               </View>
               <View style={styles.inputBox}>
                 <TextInput
-                  style={styles.txtSearch}
+                  // style={styles.txtSearch}
                   secureTextEntry={true}
                   placeholder="Password"
                   placeholderTextColor="rgba(59, 59, 59, 0.3)"

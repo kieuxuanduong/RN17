@@ -6,19 +6,11 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  TextInput,
   SafeAreaView,
-  Pressable,
-  Dimensions,
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
-import Header from '../../components/header';
 import GradientText from '../../components/gradient-text';
 import GradientButton from '../../components/gradient-button';
-
-const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -155,7 +147,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Profile = ({route, navigation}) => {
+const Profile = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
@@ -198,8 +190,7 @@ const Profile = ({route, navigation}) => {
 
               <GradientButton
                 style={styles.linearButton}
-                linearStyle={{borderRadius: 17.5}}
-                onPress={() => alert('hello')}>
+                linearStyle={{borderRadius: 17.5}}>
                 <Text style={styles.txtBtn}>Buy Again</Text>
               </GradientButton>
             </View>

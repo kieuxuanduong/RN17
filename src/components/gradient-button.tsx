@@ -1,10 +1,12 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
-import MaskedView from '@react-native-community/masked-view';
+import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const GradientButton = props => {
-  console.log(props);
+const GradientButton = (props: {
+  children: JSX.Element;
+  linearStyle: StyleProp<ViewStyle>;
+  style: StyleProp<ViewStyle>;
+}) => {
   return (
     <LinearGradient
       start={{x: 0, y: 0}}

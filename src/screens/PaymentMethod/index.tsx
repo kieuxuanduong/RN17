@@ -3,11 +3,8 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,6 +12,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -72,17 +70,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
     width: screenWidth - 50,
-    // height: 57,
+    height: 57,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 23,
+    paddingLeft: 28,
     marginBottom: 12,
-  },
-  txtDetails: {
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 25,
-    marginTop: 9,
   },
   linearButton: {
     borderRadius: 15,
@@ -108,7 +100,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const UploadPhoto = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const PaymentMethod = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -126,20 +122,22 @@ const UploadPhoto = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Upload Your Photo{'\n'}Profile</Text>
+            <Text style={styles.txtTitle}>Payment Method</Text>
             <Text style={styles.txtSubTitle}>
               This data will be displayed in your account{'\n'}profile for
               security
             </Text>
             <View style={styles.containerInput}>
               <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_gallery} />
-                <Text style={styles.txtDetails}>From Gallery</Text>
+                <Image source={Assets.ic_paypal} />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_camera} />
-                <Text style={styles.txtDetails}>Take Photo </Text>
+                <Image source={Assets.ic_visa} />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.inputBox}>
+                <Image source={Assets.ic_payoneer} />
               </TouchableOpacity>
             </View>
           </View>
@@ -152,7 +150,7 @@ const UploadPhoto = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('UploadPreview');
+              navigation.navigate('UploadPhoto');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -164,4 +162,4 @@ const UploadPhoto = ({navigation}) => {
   );
 };
 
-export default UploadPhoto;
+export default PaymentMethod;

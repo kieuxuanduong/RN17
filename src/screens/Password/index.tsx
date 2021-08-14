@@ -6,8 +6,6 @@ import {
   TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,6 +13,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -73,9 +72,12 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(90, 108, 234, 0.07)',
     width: screenWidth - 50,
     height: 57,
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingLeft: 28,
+    paddingRight: 18,
     marginBottom: 12,
+    flexDirection: 'row',
   },
   linearButton: {
     borderRadius: 15,
@@ -101,7 +103,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignupProcess = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const Password = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -119,35 +125,27 @@ const SignupProcess = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>
-              Fill in your bio to get{'\n'}started
-            </Text>
+            <Text style={styles.txtTitle}>Reset your password{'\n'}here</Text>
             <Text style={styles.txtSubTitle}>
-              This data will be displayed in your account{'\n'}profile for
-              security
+              Select which contact details should we{'\n'}use to reset your
+              password
             </Text>
             <View style={styles.containerInput}>
               <View style={styles.inputBox}>
                 <TextInput
-                  style={styles.txtSearch}
+                  // style={styles.txtSearch}
                   placeholder="First Name"
                   placeholderTextColor="rgba(59, 59, 59, 0.3)"
                 />
+                <Image source={Assets.ic_show_on} />
               </View>
               <View style={styles.inputBox}>
                 <TextInput
-                  style={styles.txtSearch}
+                  // style={styles.txtSearch}
                   placeholder="Last Name"
                   placeholderTextColor="rgba(59, 59, 59, 0.3)"
                 />
-              </View>
-              <View style={styles.inputBox}>
-                <TextInput
-                  style={styles.txtSearch}
-                  keyboardType="phone-pad"
-                  placeholder="Mobile Number"
-                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
-                />
+                <Image source={Assets.ic_show_off} />
               </View>
             </View>
           </View>
@@ -160,7 +158,7 @@ const SignupProcess = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('PaymentMethod');
+              navigation.navigate('PasswordSuccess');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -172,4 +170,4 @@ const SignupProcess = ({navigation}) => {
   );
 };
 
-export default SignupProcess;
+export default Password;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Swiper from 'react-native-swiper';
 import {View, StyleSheet, Image, Dimensions} from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 
 const widthScreen = Dimensions.get('window').width;
 const widthImgBanner = widthScreen - 50;
@@ -24,7 +25,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const Banner = ({autoplay = true, dataBanner}) => {
+interface IDataBanner {
+  id:string;
+  src: ImageSourcePropType;
+}
+
+interface Props {
+  dataBanner: IDataBanner[];
+  autoplay: boolean;
+}
+
+const Banner = ({autoplay = true, dataBanner}: Props) => {
   return (
     <View style={styles.containerBanner}>
       <Swiper autoplay={autoplay} loop paginationStyle={{bottom: 12}}>

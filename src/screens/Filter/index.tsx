@@ -5,7 +5,6 @@ import {
   Text,
   Image,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   TextInput,
   SafeAreaView,
@@ -13,6 +12,9 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../../components/header';
+import {TRootStackParamList} from '../../../App';
+import {RouteProp} from '@react-navigation/native';
+import {MainTabNavigationProp} from '../Home';
 
 const styles = StyleSheet.create({
   container: {
@@ -103,7 +105,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const Section = ({title, data}) => {
+type FilterRouteProp = RouteProp<TRootStackParamList, 'Filter'>;
+
+interface Props {
+  route: FilterRouteProp;
+  navigation: MainTabNavigationProp;
+}
+
+const Section = ({
+  title,
+  data,
+  txtValue,
+}: {
+  title: string;
+  data: any[];
+  txtValue: string;
+}) => {
+  // const [isShown, setisShown] = React.useState<boolean>(true);
+
   return (
     <View>
       <View style={styles.containerTitleSection}>
@@ -111,18 +130,20 @@ const Section = ({title, data}) => {
       </View>
       <View style={styles.containerList}>
         {data.map((item, index) => {
-          return (
-            <View key={index} style={styles.containerItem}>
-              <Text style={styles.txtNameItem}>{item.name}</Text>
-            </View>
-          );
+          if (item.name.toLowerCase().includes(txtValue)) {
+            return (
+              <View key={index} style={styles.containerItem}>
+                <Text style={styles.txtNameItem}>{item.name}</Text>
+              </View>
+            );
+          }
         })}
       </View>
     </View>
   );
 };
 
-const Filter = ({route, navigation}) => {
+const Filter = ({route, navigation}: Props) => {
   console.log('route', route);
   const dataList = [
     {
@@ -184,6 +205,9 @@ const Filter = ({route, navigation}) => {
       ],
     },
   ];
+
+  const [txtValue, setTxtValue] = React.useState<string>('');
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={{flex: 1}}>
@@ -198,6 +222,10 @@ const Filter = ({route, navigation}) => {
                 style={styles.txtSearch}
                 placeholder="What do you want to order?"
                 placeholderTextColor="rgba(249, 168, 77, 0.4)"
+                onChangeText={value => {
+                  setTxtValue(value);
+                  console.log(txtValue);
+                }}
               />
             </View>
           </View>
@@ -206,7 +234,11 @@ const Filter = ({route, navigation}) => {
           {dataList.map((item, index) => {
             return (
               <View key={index}>
-                <Section title={item.title} data={item.data} />
+                <Section
+                  title={item.title}
+                  data={item.data}
+                  txtValue={txtValue}
+                />
               </View>
             );
           })}

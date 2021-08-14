@@ -1,61 +1,60 @@
 import React from 'react';
 import {
   View,
-  ImageBackground,
-  StyleSheet,
-  Pressable,
-  SafeAreaView,
-  Image,
   Text,
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
-import GradientText from '../../components/gradient-text';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
+
+const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  bg_pattern: {
-    flex: 1,
-  },
   containerContent: {
     flex: 1,
-    // backgroundColor: 'green',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  logo: {
-    width: 134,
-    height: 134,
+  imgOnboard: {
+    width: screenWidth,
+    // backgroundColor: 'green',
+    marginTop: 87,
   },
-  brand: {
-    fontSize: 30,
-    lineHeight: 39,
-    fontWeight: '700',
-    fontFamily: 'Viga',
+  containerTxt: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 42,
+    // backgroundColor: 'red',
+  },
+  txtTitle: {
     textAlign: 'center',
-    marginTop: 33,
-    marginBottom: 12,
-  },
-  motto: {
-    fontSize: 23,
-    lineHeight: 30,
     color: '#09051C',
+    fontSize: 22,
     fontWeight: '700',
+    lineHeight: 29,
+  },
+  txtSubTitle: {
     textAlign: 'center',
+    fontSize: 12,
+    lineHeight: 22,
   },
   linearButton: {
     borderRadius: 15,
     height: 57,
     // width: 157,
-    marginBottom: 60,
-    alignSelf: 'center',
+    marginBottom: 31,
   },
-  btnLogin: {
+  btnNext: {
     flex: 1,
     borderRadius: 15,
     justifyContent: 'center',
@@ -67,27 +66,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
+    // margin: 10,
     color: '#ffffff',
     backgroundColor: 'transparent',
   },
 });
 
-const PasswordSuccess = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const Onboarding03 = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
-        <ImageBackground
-          source={Assets.bg_pattern}
-          resizeMode="cover"
-          style={styles.bg_pattern}>
-          <View style={styles.containerContent}>
-            <Image
-              resizeMode={'contain'}
-              source={Assets.logo_success}
-              style={styles.logo}
-            />
-            <GradientText style={styles.brand}>Congrats!</GradientText>
-            <Text style={styles.motto}>Password reset successful</Text>
+        <View style={styles.containerContent}>
+          {/* <Image style={styles.imgOnboard} source={Assets.img_onboard03} /> */}
+          <Image style={styles.imgOnboard} source={Assets.img_onboard03} />
+          <View style={styles.containerTxt}>
+            <Text style={styles.txtTitle}>
+              Food Ninja is Where Your{'\n'}Comfort Food Lives
+            </Text>
+            <Text style={styles.txtSubTitle}>
+              Enjoy a fast and smooth food delivery at{'\n'}your doorstep
+            </Text>
           </View>
           <LinearGradient
             start={{x: 0, y: 0}}
@@ -95,17 +97,17 @@ const PasswordSuccess = ({navigation}) => {
             colors={['rgba(83, 232, 139, 1)', 'rgba(21, 190, 119, 1)']}
             style={styles.linearButton}>
             <TouchableOpacity
-              style={styles.btnLogin}
+              style={styles.btnNext}
               onPress={() => {
                 navigation.navigate('Login');
               }}>
-              <Text style={styles.buttonText}>Back</Text>
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </LinearGradient>
-        </ImageBackground>
+        </View>
       </SafeAreaView>
     </View>
   );
 };
 
-export default PasswordSuccess;
+export default Onboarding03;

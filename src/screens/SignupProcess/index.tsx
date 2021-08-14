@@ -6,8 +6,6 @@ import {
   TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,13 +13,14 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FEFEFF',
   },
   containerContent: {
     flex: 1,
@@ -68,32 +67,15 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     backgroundColor: '#fff',
-    elevation: 3,
+    elevation: 1,
     borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
-    width: screenWidth - 28,
-    height: 103,
-    // justifyContent: 'space-around',
-    padding: 26,
-    alignItems: 'center',
+    width: screenWidth - 50,
+    height: 57,
+    justifyContent: 'center',
+    paddingLeft: 28,
     marginBottom: 12,
-    flexDirection: 'row',
   },
-  txtInput: {
-    paddingLeft: 16,
-  },
-  txtVia: {
-    color: '#828282',
-    fontSize: 16,
-    lineHeight: 24,
-    marginBottom: 4,
-  },
-  txtDetails: {
-    color: '#09051C',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-
   linearButton: {
     borderRadius: 15,
     height: 57,
@@ -118,18 +100,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const FourDot = () => {
-  return (
-    <View style={{flexDirection: 'row', marginRight: 10}}>
-      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
-      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
-      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
-      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
-    </View>
-  );
+type Props = {
+  navigation: OnBoardNavigationProp;
 };
 
-const ViaMethod = ({navigation}) => {
+const SignupProcess = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -147,33 +122,36 @@ const ViaMethod = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Forgot password?</Text>
+            <Text style={styles.txtTitle}>
+              Fill in your bio to get{'\n'}started
+            </Text>
             <Text style={styles.txtSubTitle}>
-              Select which contact details should we{'\n'}use to reset your
-              password
+              This data will be displayed in your account{'\n'}profile for
+              security
             </Text>
             <View style={styles.containerInput}>
-              <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_sms} />
-                <View style={styles.txtInput}>
-                  <Text style={styles.txtVia}>Via sms:</Text>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <FourDot />
-                    <FourDot />
-                    <Text style={styles.txtDetails}>4235</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_email} />
-                <View style={styles.txtInput}>
-                  <Text style={styles.txtVia}>Via email:</Text>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <FourDot />
-                    <Text style={styles.txtDetails}>@gmail.com</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <View style={styles.inputBox}>
+                <TextInput
+                  // style={styles.txtSearch}
+                  placeholder="First Name"
+                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
+                />
+              </View>
+              <View style={styles.inputBox}>
+                <TextInput
+                  // style={styles.txtSearch}
+                  placeholder="Last Name"
+                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
+                />
+              </View>
+              <View style={styles.inputBox}>
+                <TextInput
+                  // style={styles.txtSearch}
+                  keyboardType="phone-pad"
+                  placeholder="Mobile Number"
+                  placeholderTextColor="rgba(59, 59, 59, 0.3)"
+                />
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -185,7 +163,7 @@ const ViaMethod = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('VerificationCode');
+              navigation.navigate('PaymentMethod');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -197,4 +175,4 @@ const ViaMethod = ({navigation}) => {
   );
 };
 
-export default ViaMethod;
+export default SignupProcess;

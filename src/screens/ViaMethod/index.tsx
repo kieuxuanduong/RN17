@@ -3,11 +3,8 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,13 +12,14 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEFEFF',
+    backgroundColor: '#fff',
   },
   containerContent: {
     flex: 1,
@@ -62,31 +60,36 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 20,
   },
-  containerPreview: {
-    justifyContent: 'flex-start',
-    marginTop: 60,
+  containerInput: {
+    justifyContent: 'space-between',
+    marginTop: 40,
+  },
+  inputBox: {
+    backgroundColor: '#fff',
+    elevation: 3,
+    borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
-    height: 245,
-    width: 238,
-    alignItems: 'flex-end',
-    marginBottom: 12,
-  },
-  imgPreview: {
-    borderRadius: 10,
-    height: 245,
-    width: 238,
-  },
-  icClose: {
-    width: 31,
-    height: 31,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: 16,
-    justifyContent: 'center',
+    width: screenWidth - 28,
+    height: 103,
+    // justifyContent: 'space-around',
+    padding: 26,
     alignItems: 'center',
-    marginRight: 10,
-    marginTop: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
-    borderWidth: 1,
+    marginBottom: 12,
+    flexDirection: 'row',
+  },
+  txtInput: {
+    paddingLeft: 16,
+  },
+  txtVia: {
+    color: '#828282',
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 4,
+  },
+  txtDetails: {
+    color: '#09051C',
+    fontSize: 16,
+    lineHeight: 24,
   },
 
   linearButton: {
@@ -113,7 +116,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const UploadPreview = ({navigation}) => {
+const FourDot = () => {
+  return (
+    <View style={{flexDirection: 'row', marginRight: 10}}>
+      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
+      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
+      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
+      <Image style={{marginRight: 4}} source={Assets.ic_dot} />
+    </View>
+  );
+};
+
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+const ViaMethod = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -131,21 +148,33 @@ const UploadPreview = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Upload Your Photo{'\n'}Profile</Text>
+            <Text style={styles.txtTitle}>Forgot password?</Text>
             <Text style={styles.txtSubTitle}>
-              This data will be displayed in your account{'\n'}profile for
-              security
+              Select which contact details should we{'\n'}use to reset your
+              password
             </Text>
-            <View>
-              <ImageBackground
-                resizeMode="contain"
-                source={Assets.img_preview}
-                style={styles.containerPreview}
-                imageStyle={styles.imgPreview}>
-                <TouchableOpacity style={styles.icClose}>
-                  <Image source={Assets.ic_close} />
-                </TouchableOpacity>
-              </ImageBackground>
+            <View style={styles.containerInput}>
+              <TouchableOpacity style={styles.inputBox}>
+                <Image source={Assets.ic_sms} />
+                <View style={styles.txtInput}>
+                  <Text style={styles.txtVia}>Via sms:</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <FourDot />
+                    <FourDot />
+                    <Text style={styles.txtDetails}>4235</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.inputBox}>
+                <Image source={Assets.ic_email} />
+                <View style={styles.txtInput}>
+                  <Text style={styles.txtVia}>Via email:</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <FourDot />
+                    <Text style={styles.txtDetails}>@gmail.com</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -157,7 +186,7 @@ const UploadPreview = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('SetLocation');
+              navigation.navigate('VerificationCode');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -169,4 +198,4 @@ const UploadPreview = ({navigation}) => {
   );
 };
 
-export default UploadPreview;
+export default ViaMethod;

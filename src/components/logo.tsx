@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Logo = ({autoplay = true, dataBanner}) => {
+const Logo = () => {
   return (
     <View>
       <Image source={Assets.img_logo} style={styles.logo} />

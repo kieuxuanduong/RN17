@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
   Pressable,
   SafeAreaView,
 } from 'react-native';
@@ -128,7 +127,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = ({navigation}) => {
+import {StackNavigationProp} from '@react-navigation/stack';
+import {TRootStackParamList} from '../../../App';
+
+export type MainTabNavigationProp = StackNavigationProp<
+  TRootStackParamList,
+  'MainTab'
+>;
+
+type Props = {
+  navigation: MainTabNavigationProp;
+};
+
+const Home = ({navigation}: Props) => {
   console.log('hello');
   console.log(navigation);
   const dataNearestRestaurant = [
@@ -184,7 +195,12 @@ const Home = ({navigation}) => {
           <View style={styles.containerSearch}>
             <Pressable
               style={styles.searchBar}
-              onPress={() => navigation.navigate('Filter')}>
+              onPress={() =>
+                navigation.navigate('Filter', {
+                  name: 'Trung',
+                  age: 18,
+                })
+              }>
               <Image source={Assets.ic_search} />
               <Text style={styles.txtSearch}>What do you want to order?</Text>
             </Pressable>

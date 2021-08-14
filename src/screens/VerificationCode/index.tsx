@@ -6,8 +6,6 @@ import {
   TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -15,13 +13,14 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import Assets from '../../config/Assets';
+import {OnBoardNavigationProp} from '../Onboarding01';
 
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEFEFF',
+    backgroundColor: '#fff',
   },
   containerContent: {
     flex: 1,
@@ -68,15 +67,27 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     backgroundColor: '#fff',
-    elevation: 1,
+    elevation: 3,
     borderRadius: 15,
     borderColor: 'rgba(90, 108, 234, 0.07)',
-    width: screenWidth - 50,
-    height: 57,
-    justifyContent: 'center',
+    width: screenWidth - 28,
+    height: 103,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    paddingLeft: 28,
     marginBottom: 12,
+    flexDirection: 'row',
+  },
+  txtInput: {
+    color: 'rgba(9, 5, 28, 1)',
+    fontSize: 33,
+    lineHeight: 49,
+    textAlign: 'center',
+    fontWeight: '700',
+    letterSpacing: 60,
+    width: screenWidth - 28,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
   },
   linearButton: {
     borderRadius: 15,
@@ -102,7 +113,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const PaymentMethod = ({navigation}) => {
+type Props = {
+  navigation: OnBoardNavigationProp;
+};
+
+const VerificationCode = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       {/* <SafeAreaView style={styles.container}> */}
@@ -120,23 +135,21 @@ const PaymentMethod = ({navigation}) => {
               style={styles.btnBack}>
               <Image source={Assets.ic_back} />
             </TouchableOpacity>
-            <Text style={styles.txtTitle}>Payment Method</Text>
+            <Text style={styles.txtTitle}>
+              Enter 4-digit{'\n'}Verification code
+            </Text>
             <Text style={styles.txtSubTitle}>
-              This data will be displayed in your account{'\n'}profile for
-              security
+              Code send to +6282045**** . This code will{'\n'}expired in 01:30
             </Text>
             <View style={styles.containerInput}>
-              <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_paypal} />
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_visa} />
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.inputBox}>
-                <Image source={Assets.ic_payoneer} />
-              </TouchableOpacity>
+              <View style={styles.inputBox}>
+                <TextInput
+                  style={styles.txtInput}
+                  maxLength={4}
+                  placeholder={'____'}
+                  keyboardType={'number-pad'}
+                />
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -148,7 +161,7 @@ const PaymentMethod = ({navigation}) => {
           <TouchableOpacity
             style={styles.btnLogin}
             onPress={() => {
-              navigation.navigate('UploadPhoto');
+              navigation.navigate('Password');
             }}>
             <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
@@ -160,4 +173,4 @@ const PaymentMethod = ({navigation}) => {
   );
 };
 
-export default PaymentMethod;
+export default VerificationCode;
