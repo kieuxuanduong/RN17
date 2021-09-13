@@ -1,109 +1,137 @@
-import * as React from 'react';
+import React from 'react';
+
 import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  BottomTabBarOptions,
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import News from '../screens/MainTab/News';
+import Trending from '../screens/MainTab/Trending';
+import Goals from '../screens/MainTab/Goals';
+import HealthyTips from '../screens/MainTab/HealthyTips';
+import Profile from '../screens/MainTab/Profile';
+import {Assets, Button, Colors, Image, View} from 'react-native-ui-lib';
+import {Header} from '@react-navigation/elements';
+import {FONTS} from '../config/Typo';
+import {BottomTabHeaderProps} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
-import {getBottomSpace} from 'react-native-iphone-x-helper';
-import * as IconlyPack from 'react-native-iconly';
-
-import Home from '../screens/Home';
-import Profile from '../screens/Profile';
-import Cart from '../screens/Cart';
-import Chat from '../screens/Chat';
-import Colors from '../config/Color';
-
-const widthScreen = Dimensions.get('window').width;
-
-export type TMainTabParamList = {
-  Home: undefined;
+export type MainTabParamList = {
+  News: undefined;
+  Trending: undefined;
+  HealthyTips: undefined;
+  Goals: undefined;
   Profile: undefined;
-  Cart: undefined;
-  Chat: undefined;
 };
-const Tab = createBottomTabNavigator<TMainTabParamList>();
 
-type TRouteName = keyof TMainTabParamList;
-
-const MyTab = ({
-  state,
-  activeTintColor = Colors.primary,
-  inactiveTintColor = Colors.primary5,
-  navigation,
-}: BottomTabBarProps<BottomTabBarOptions>) => {
-  // console.log(props);
-  let routeNames = state.routeNames as TRouteName[];
-  let currentIndex = state.index;
-  const renderContent = (item: TRouteName, color: string) => {
-    switch (item) {
-      case 'Home':
-        return <IconlyPack.Home set="bold" color={color} key={item} />;
-      case 'Profile':
-        return <IconlyPack.User set="bold" color={color} key={item} />;
-      case 'Cart':
-        return (
-          <View>
-            <IconlyPack.Buy set="bold" color={color} key={item} />
-            <View style={styles.badge}>
-              <Text style={styles.txtNumberCart}>7</Text>
-            </View>
-          </View>
-        );
-      case 'Chat':
-        return (
-          <View>
-            <IconlyPack.Chat set="bold" color={color} key={item} />
-            <View style={styles.badge} />
-          </View>
-        );
-      default:
-        return null;
-    }
-  };
-  return (
-    <View style={styles.containerTab}>
-      {routeNames.map((item, index) => {
-        let color =
-          currentIndex === index ? activeTintColor : inactiveTintColor;
-
-        return (
-          <TouchableOpacity
-            style={styles.btnTab}
-            key={index}
-            onPress={() => navigation.navigate(item)}>
-            {renderContent(item, color)}
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
-};
+const Tab = createBottomTabNavigator();
 
 const MainTab = () => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: Colors.primary,
-        inactiveTintColor: Colors.primary5,
-      }}
-      tabBar={MyTab}>
+      // tabBar={props => <MyTab {...props} />}
+      screenOptions={() => ({
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.dark50,
+      })}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="News"
+        component={News}
         options={{
-          tabBarIcon: () => (
-            <IconlyPack.Home
-              set="bold"
-              // primaryColor="blueviolet"
-              // secondaryColor="blue"
+          // headerShown: false,
+          tabBarLabel: 'News',
+          tabBarIcon: ({color}) => (
+            <Image
+              assetGroup="icTab"
+              assetName="news"
+              width-28
+              height-28
+              tintColor={color}
+            />
+          ),
+          headerTransparent: true,
+          header: (props: BottomTabHeaderProps) => {
+            return (
+              <Header
+                title="Exercises"
+                headerTitleAlign="left"
+                headerTitleStyle={{
+                  fontSize: 27,
+                  fontFamily: FONTS.Heavy,
+                }}
+                headerRight={({tintColor, pressColor, pressOpacity}) => {
+                  return (
+                    <View row>
+                      <Button
+                        iconSource={Assets.icHeader.search}
+                        color={tintColor}
+                        style={{width: 44, height: 44}}
+                        link
+                      />
+                      <Button
+                        iconSource={Assets.icHeader.dots}
+                        color={tintColor}
+                        style={{width: 44, height: 44}}
+                        link
+                      />
+                    </View>
+                  );
+                }}
+                headerStyle={{
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                }}
+                headerTintColor={Colors.white}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Training"
+        component={Trending}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Training',
+          tabBarIcon: ({color}) => (
+            <Image
+              assetGroup="icTab"
+              assetName="training"
+              width-28
+              height-28
+              tintColor={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="HealthyTips"
+        component={HealthyTips}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'HealthyTips',
+          tabBarIcon: ({color}) => (
+            <Image
+              assetGroup="icTab"
+              assetName="healthyTips"
+              width-28
+              height-28
+              tintColor={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Goals"
+        component={Goals}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Goals',
+          tabBarIcon: ({color}) => (
+            <Image
+              assetGroup="icTab"
+              assetName={'goals'}
+              width-28
+              height-28
+              tintColor={color}
             />
           ),
         }}
@@ -112,71 +140,21 @@ const MainTab = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: () => <IconlyPack.User set="bold" />,
-        }}
-      />
-      <Tab.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          tabBarIcon: () => <IconlyPack.Buy set="bold" />,
-        }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          tabBarIcon: () => <IconlyPack.Chat set="bold" />,
+          headerShown: false,
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color}) => (
+            <Image
+              assetGroup="icTab"
+              assetName="profile"
+              width-28
+              height-28
+              tintColor={color}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  containerTab: {
-    width: widthScreen - 32,
-    backgroundColor: '#FFF',
-    position: 'absolute',
-    bottom: getBottomSpace() ? getBottomSpace() + 10 : 16,
-    left: 16,
-    padding: 16,
-    flexDirection: 'row',
-    borderRadius: 22,
-    shadowColor: 'rgb(90, 108, 234)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 50,
-    elevation: 3,
-  },
-
-  btnTab: {
-    flex: 1,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  badge: {
-    position: 'absolute',
-    backgroundColor: 'red',
-    borderRadius: 7,
-    minHeight: 14,
-    minWidth: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    top: -3,
-    right: -5,
-    borderWidth: 1,
-  },
-  txtNumberCart: {
-    fontSize: 9,
-    lineHeight: 12,
-    color: '#fff',
-  },
-});
 
 export default MainTab;
